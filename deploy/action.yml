@@ -1,0 +1,11 @@
+name: Deploy
+
+runs:
+  using: composite
+  steps:
+#    - name: Checkout code
+#      uses: actions/checkout@v4
+
+    - name: Placeholder deploy
+      shell: bash
+      run: echo "CD job will deploy build artifact"

@@ -1,0 +1,14 @@
+name: Build App
+
+runs:
+  using: composite
+  steps:
+#    - name: Checkout code
+#      uses: actions/checkout@v4
+
+    - name: Setup Gradle Environment
+      uses: ./setup-gradle-env
+
+    - name: Build (without tests)
+      shell: bash
+      run: ./gradlew clean build -x test
