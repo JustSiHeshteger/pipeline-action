@@ -9,13 +9,8 @@ inputs:
 runs:
   using: composite
   steps:
-#    - name: Checkout code
-#      uses: actions/checkout@v4
-#      with:
-#        fetch-depth: 0
-
     - name: Setup Gradle Environment
-      uses: ./setup-gradle-env
+      uses: JustSiHeshteger/pipeline-action/setup-gradle-env@v1
 
     - name: Cache SonarQube packages
       uses: actions/cache@v4

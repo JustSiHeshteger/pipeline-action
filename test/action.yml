@@ -7,7 +7,7 @@ runs:
     #        uses: actions/checkout@v4
 
     - name: Setup Gradle Environment
-      uses: ./setup-gradle-env
+      uses: JustSiHeshteger/pipeline-action/setup-gradle-env@v1
 
     - name: Run Tests
       shell: bash
