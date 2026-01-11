@@ -4,11 +4,11 @@ description: Still blank description
 inputs:
   java_version:
     description: "Java version"
-    required: true
+    required: false
     default: '21'
   java_distributor:
     description: "Java distributor"
-    required: true
+    required: false
     default: 'temurin'
   working_directory:
     description: "Directory of project on github"
@@ -21,4 +21,4 @@ runs:
     - name: Output java env
       shell: bash
       run: echo "Java version ${{ inputs.java_version }}; Java Distibutor ${{ inputs.java_distributor }}; \
-           Working directory ${{ inputs.working_directory }}; SONAR_TOKEN ${{ secrets.SONAR_TOKEN }}"
+           Working directory ${{ inputs.working_directory }}; SONAR_TOKEN ${{ env.SONAR_TOKEN }}"
