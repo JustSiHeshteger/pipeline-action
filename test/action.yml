@@ -1,14 +1,17 @@
 name: Test App
 
+inputs:
+  working_directory:
+    description: "Directory of project on github"
+    required: false
+    default: .
+
 runs:
   using: composite
   steps:
-    #      - name: Checkout code
-    #        uses: actions/checkout@v4
-
     - name: Setup Gradle Environment
       uses: JustSiHeshteger/pipeline-action/setup-gradle-env@v1
 
     - name: Run Tests
       shell: bash
-      run: ./gradlew test
+      run: ${{ inputs.working_directory }}/gradlew test

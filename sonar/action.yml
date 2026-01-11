@@ -24,4 +24,4 @@ runs:
       env:
         SONAR_TOKEN: ${{ env.SONAR_TOKEN }}
       shell: bash
-      run: ./gradlew sonar
+      run: ${{ inputs.working_directory }}/gradlew sonar
