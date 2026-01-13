@@ -1,4 +1,4 @@
-name: 'Setup Gradle Environment'
+name: Setup Gradle Environment
 
 inputs:
   java_version:
