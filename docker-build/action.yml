@@ -1,0 +1,8 @@
+name: Docker Build
+
+runs:
+  using: composite
+  steps:
+    - name: Placeholder Docker Build
+      shell: bash
+      run: echo "CD job will docker build artifact"
