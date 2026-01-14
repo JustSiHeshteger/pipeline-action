@@ -1,15 +1,15 @@
 name: Integration Test App
 
 inputs:
-  java_version:
+  java-version:
     description: "Java version"
     required: false
     default: '21'
-  java_distributor:
+  java-distributor:
     description: "Java distributor"
     required: false
     default: 'temurin'
-  working_directory:
+  working-directory:
     description: "Directory of project on github"
     required: false
     default: '.'
@@ -18,12 +18,12 @@ runs:
   using: composite
   steps:
     - name: Setup Gradle Environment
-      uses: JustSiHeshteger/pipeline-action/setup-gradle-env@dca688e912f0dfc069955f3277e51b55b77fffd8
+      uses: JustSiHeshteger/pipeline-action/setup-gradle-env@d3495b26e5456da15218ab2ae47f049fae8f1030
       with:
-        java_version: ${{ inputs.java-version }}
-        java_distributor: ${{ inputs.java-distribution }}
-        working_directory: ${{ inputs.working_directory }}
+        java-version: ${{ inputs.java-version }}
+        java-distributor: ${{ inputs.java-distribution }}
+        working-directory: ${{ inputs.working-directory }}
 
     - name: Run Tests
       shell: bash
-      run: ${{ env.WORKING_DIRECTORY }}/gradlew integrationTest
+      run: ${{ inputs.working-directory }}/gradlew integrationTest
