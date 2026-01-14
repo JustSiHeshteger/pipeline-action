@@ -1,10 +1,28 @@
 name: Integration Test App
 
+inputs:
+  java_version:
+    description: "Java version"
+    required: false
+    default: '21'
+  java_distributor:
+    description: "Java distributor"
+    required: false
+    default: 'temurin'
+  working_directory:
+    description: "Directory of project on github"
+    required: false
+    default: '.'
+
 runs:
   using: composite
   steps:
     - name: Setup Gradle Environment
-      uses: JustSiHeshteger/pipeline-action/setup-gradle-env@8c85628b4046ef954c525c4e3d0ded22705db42b
+      uses: JustSiHeshteger/pipeline-action/setup-gradle-env@dca688e912f0dfc069955f3277e51b55b77fffd8
+      with:
+        java_version: ${{ inputs.java-version }}
+        java_distributor: ${{ inputs.java-distribution }}
+        working_directory: ${{ inputs.working_directory }}
 
     - name: Run Tests
       shell: bash
