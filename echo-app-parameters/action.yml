@@ -1,5 +1,19 @@
 name: Custom Pipeline For Java Gradle
-description: Still blank description
+description: Description about project parameters
+
+inputs:
+  java-version:
+    description: Java version
+    required: false
+    default: '21'
+  java-distribution:
+    description: Java distribution (temurin, zulu, corretto, etc.)
+    required: false
+    default: 'temurin'
+  working-directory:
+    description: Working directory
+    required: false
+    default: .
 
 runs:
   using: composite
