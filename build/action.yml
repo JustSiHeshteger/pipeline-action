@@ -4,7 +4,7 @@ runs:
   using: composite
   steps:
     - name: Setup Gradle Environment
-      uses: JustSiHeshteger/pipeline-action/setup-gradle-env@v2
+      uses: JustSiHeshteger/pipeline-action/setup-gradle-env@8c85628b4046ef954c525c4e3d0ded22705db42b
 
     - name: Build (without tests)
       shell: bash
