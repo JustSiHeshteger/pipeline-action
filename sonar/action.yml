@@ -21,7 +21,7 @@ runs:
       uses: JustSiHeshteger/pipeline-action/setup-gradle-env@d3495b26e5456da15218ab2ae47f049fae8f1030
       with:
         java-version: ${{ inputs.java-version }}
-        java-distributor: ${{ inputs.java-distribution }}
+        java-distributor: ${{ inputs.java-distributor }}
         working-directory: ${{ inputs.working-directory }}
 
     - name: Cache SonarQube packages
