@@ -21,7 +21,7 @@ runs:
       uses: JustSiHeshteger/pipeline-action/echo-app-parameters@95d35201a24d2b04c68a5630293f90219c417b0d
       with:
         java-version: ${{ inputs.java-version }}
-        java-distribution: ${{ inputs.java-distribution }}
+        java-distributor: ${{ inputs.java-distributor }}
         working-directory: ${{ inputs.working-directory }}
 
     - name: Checkout repository
