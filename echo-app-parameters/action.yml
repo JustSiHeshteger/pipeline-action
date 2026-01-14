@@ -6,5 +6,6 @@ runs:
   steps:
     - name: Output java env
       shell: bash
-      run: echo "Java version ${{ env.JAVA_VERSION }}; Java Distibutor ${{ env.JAVA_DISTRIBUTOR }}; \
-           Working directory ${{ env.WORKING_DIRECTORY }}; SONAR_TOKEN ${{ env.SONAR_TOKEN }}"
+      run: echo "Java version ${{ env.JAVA_VERSION }}; \
+           Java Distibutor ${{ env.JAVA_DISTRIBUTOR }}; \
+           Working directory ${{ env.WORKING_DIRECTORY }}"
