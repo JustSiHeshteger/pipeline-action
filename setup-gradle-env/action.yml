@@ -1,15 +1,15 @@
 name: Setup Gradle Environment
 
 inputs:
-  java_version:
+  java-version:
     description: "Java version"
     required: false
     default: '21'
-  java_distributor:
+  java-distributor:
     description: "Java distributor"
     required: false
     default: 'temurin'
-  working_directory:
+  working-directory:
     description: "Directory of project on github"
     required: false
     default: '.'
@@ -18,24 +18,24 @@ runs:
   using: composite
   steps:
     - name: Echo App Parameters
-      uses: JustSiHeshteger/pipeline-action/echo-app-parameters@f76345aea9663eb79a61df980dcf39a358c99565
+      uses: JustSiHeshteger/pipeline-action/echo-app-parameters@95d35201a24d2b04c68a5630293f90219c417b0d
       with:
         java-version: ${{ inputs.java-version }}
         java-distribution: ${{ inputs.java-distribution }}
-        working-directory: ${{ inputs.working_directory }}
+        working-directory: ${{ inputs.working-directory }}
 
     - name: Checkout repository
       uses: actions/checkout@v4
 
     - name: Set up JDK
-      uses: actions/setup-java@v5
+      uses: actions/setup-java@v4
       with:
-        java-version: ${{ inputs.java_version }}
-        distribution: ${{ inputs.java_distributor }}
+        java-version: ${{ inputs.java-version }}
+        distribution: ${{ inputs.java-distributor }}
 
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v4
 
     - name: Make Gradle wrapper executable
       shell: bash
-      run: chmod +x ${{ inputs.working_directory }}/gradlew
+      run: chmod +x ${{ inputs.working-directory }}/gradlew
