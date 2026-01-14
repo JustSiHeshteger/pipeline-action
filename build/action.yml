@@ -1,11 +1,5 @@
 name: Build App
 
-inputs:
-  working_directory:
-    description: "Directory of project on github"
-    required: false
-    default: .
-
 runs:
   using: composite
   steps:
@@ -14,4 +8,4 @@ runs:
 
     - name: Build (without tests)
       shell: bash
-      run: ${{ inputs.working_directory }}/gradlew clean build -x test
+      run: ${{ env.WORKING_DIRECTORY }}/gradlew clean build -x test
