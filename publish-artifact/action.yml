@@ -1,0 +1,29 @@
+name: Publish Build Artifact
+
+inputs:
+  artifact-name:
+    description: Build Name
+    required: false
+    default: app-build
+  jar-path:
+    description: Path of Build
+    required: true
+  version:
+    description: Build Version
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Create Build Artifact
+      shell: bash
+      run: |
+        mkdir artifact
+        cp ${{ inputs.jar-path }} artifact/app.jar
+        echo "${{ inputs.version }}" > artifact/version.txt
+
+    - name: Upload Build Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ inputs.artifact-name }}
+        path: artifact
