@@ -5,22 +5,48 @@ inputs:
     description: Build Name
     required: false
     default: app-build
-  jar-path:
-    description: Path of Build
-    required: true
-  version:
-    description: Build Version
-    required: true
+  working-directory:
+    description: Project directory
+    required: false
+    default: '.'
 
 runs:
   using: composite
   steps:
-    - name: Create Build Artifact
+    - name: Prepare artifact directory
       shell: bash
       run: |
-        mkdir artifact
-        cp ${{ inputs.jar-path }} artifact/app.jar
-        echo "${{ inputs.version }}" > artifact/version.txt
+        set -e
+        mkdir -p artifact
+
+        echo "Searching JAR in ${{ inputs.working-directory }}/build/libs"
+        JAR_FILE=$(ls ${{ inputs.working-directory }}/build/libs/*.jar | head -n 1)
+
+        if [ -z "$JAR_FILE" ]; then
+          echo "JAR file not found"
+          exit 1
+        fi
+
+        echo "Found JAR: $JAR_FILE"
+        cp "$JAR_FILE" artifact/app.jar
+
+    - name: Resolve version from Gradle
+      shell: bash
+      run: |
+        set -e
+        VERSION=$(
+          ${{ inputs.working-directory }}/gradlew -q properties \
+          | grep '^version:' \
+          | awk '{print $2}'
+        )
+
+        if [ -z "$VERSION" ]; then
+          echo "Version not resolved"
+          exit 1
+        fi
+
+        echo "Resolved version: $VERSION"
+        echo "$VERSION" > artifact/version.txt
 
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v4

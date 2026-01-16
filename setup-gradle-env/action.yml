@@ -2,15 +2,15 @@ name: Setup Gradle Environment
 
 inputs:
   java-version:
-    description: "Java version"
+    description: Java version
     required: false
     default: '21'
   java-distributor:
-    description: "Java distributor"
+    description: Java distributor
     required: false
     default: 'temurin'
   working-directory:
-    description: "Directory of project on github"
+    description: Directory of project on github
     required: false
     default: '.'
 

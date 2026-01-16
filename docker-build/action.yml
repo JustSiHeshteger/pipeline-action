@@ -2,17 +2,17 @@ name: Docker Build
 
 inputs:
   java-version:
-    description: "Java version"
+    description: Java version
     required: false
     default: '21'
   java-distributor:
-    description: "Java distributor"
+    description: Java distributor
     required: false
-    default: 'temurin'
+    default: temurin
   working-directory:
-    description: "Directory of project on github"
+    description: Directory of project on github
     required: false
-    default: '.'
+    default: .
   artifact-name:
     description: Name of build artifact
     required: false
@@ -44,6 +44,6 @@ runs:
         -f ${{ github.action_path }}/Dockerfile \
         --build-arg JAR_FILE=artifact/app.jar \
         --build-arg JAVA_VERSION=${{ inputs.java-version }} \
-        --build-arg JAVA_DISTRIBUTION=${{ inputs.java-distribution }} \
+        --build-arg JAVA_DISTRIBUTION=${{ inputs.java-distributor }} \
         -t ${{ inputs.image-name }}:${{ inputs.image-tag }} \
         .
