@@ -10,7 +10,6 @@ inputs:
     required: false
     default: '.'
 
-
 runs:
   using: composite
   steps:
@@ -18,11 +17,18 @@ runs:
       uses: actions/download-artifact@v4
       with:
         name: ${{ inputs.artifact-name }}
-        path: ${{ inputs.working-directory }}
+
+    - name: Show downloaded files
+      shell: bash
+      run: |
+        echo "Workspace:"
+        pwd
+        echo "Tree:"
+        find . -type f
 
     - name: List build/libs
       shell: bash
-      run: ls -la $GITHUB_WORKSPACE/${{ inputs.working-directory }}/build/libs
+      run: ls -la ${{ inputs.working-directory }}/build/libs
 
     - name: Prepare artifact directory
       shell: bash
