@@ -26,9 +26,9 @@ runs:
         echo "Tree:"
         find . -type f
 
-    - name: List build/libs
+    - name: List workspace
       shell: bash
-      run: ls -la ${{ inputs.working-directory }}/build/libs
+      run: ls -la ${{ inputs.working-directory }}
 
     - name: Prepare artifact directory
       shell: bash
@@ -36,8 +36,8 @@ runs:
         set -e
         mkdir -p artifact
 
-        echo "Searching JAR in ${{ inputs.working-directory }}/build/libs"
-        JAR_FILE=$(ls ${{ inputs.working-directory }}/build/libs/*.jar | head -n 1)
+        echo "Searching JAR in ${{ inputs.working-directory }}"
+        JAR_FILE=$(ls ${{ inputs.working-directory }}/*.jar | head -n 1)
 
         if [ -z "$JAR_FILE" ]; then
           echo "JAR file not found"
