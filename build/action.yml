@@ -36,4 +36,4 @@ runs:
       uses: actions/upload-artifact@v4
       with:
         name: ${{ inputs.artifact-name }}
-        path: ${{ inputs.working-directory }}/build/libs/*.jar
+        path: ${{ inputs.working-directory }}/build/libs/
