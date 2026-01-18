@@ -20,6 +20,6 @@ runs:
   steps:
     - name: Output java env
       shell: bash
-      run: echo "Java version ${{ inputs.java-version }}; \
-           Java Distibutor ${{ inputs.java-distributor }}; \
+      run: echo "\nJava version ${{ inputs.java-version }}; \n
+           Java Distibutor ${{ inputs.java-distributor }}; \n
            Working directory ${{ inputs.working-directory }}"
