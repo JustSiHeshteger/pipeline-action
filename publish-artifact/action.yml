@@ -9,6 +9,10 @@ inputs:
     description: Project directory
     required: false
     default: '.'
+  application-name:
+    description: Application Name
+    required: false
+    default: 'application-jar'
 
 runs:
   using: composite
@@ -18,49 +22,18 @@ runs:
       with:
         name: ${{ inputs.artifact-name }}
 
-    - name: Show downloaded files
-      shell: bash
-      run: |
-        echo "Workspace:"
-        pwd
-        echo "Tree:"
-        find . -type f
-
     - name: List workspace
       shell: bash
       run: ls -la ${{ inputs.working-directory }}
 
-    - name: Prepare artifact directory
+    - name: Upload Artifact
+      id: upload
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ inputs.application-name }}
+        path: "${{ inputs.working-directory }}/*.jar"
+
+    - name: Print Artifact URL
       shell: bash
-      run: |
-        set -e
-        mkdir -p artifact
-
-        echo "Searching JAR in ${{ inputs.working-directory }}"
-        JAR_FILE=$(ls ${{ inputs.working-directory }}/*.jar | head -n 1)
-
-        if [ -z "$JAR_FILE" ]; then
-          echo "JAR file not found"
-          exit 1
-        fi
-
-        echo "Found JAR: $JAR_FILE"
-        cp "$JAR_FILE" artifact/app.jar
-
-    - name: Resolve version from Gradle
-      shell: bash
-      run: |
-        set -e
-        VERSION=$(
-          ${{ inputs.working-directory }}/gradlew -q properties \
-          | grep '^version:' \
-          | awk '{print $2}'
-        )
-
-        if [ -z "$VERSION" ]; then
-          echo "Version not resolved"
-          exit 1
-        fi
-
-        echo "Resolved version: $VERSION"
-        echo "$VERSION" > artifact/version.txt
+      run: | 
+        echo "Artifact URL: ${{ steps.upload.outputs.artifact-url }}"
