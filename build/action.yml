@@ -22,7 +22,7 @@ runs:
   using: composite
   steps:
     - name: Setup Gradle Environment
-      uses: ./.github/actions/setup-gradle-env
+      uses: .github/actions/setup-gradle-env
       with:
         java-version: ${{ inputs.java-version }}
         java-distributor: ${{ inputs.java-distributor }}
