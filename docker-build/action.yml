@@ -54,4 +54,5 @@ runs:
           --build-arg JAR_FILE=$JAR_PATH \
           -f ${{ inputs.dockerfile }} \
           -t ${{ inputs.image-name }}:${{ inputs.image-tag }} \
-          ${{ inputs.working-directory }}
+          ${{ inputs.working-directory }} \
+          .
