@@ -18,7 +18,8 @@ runs:
   using: composite
   steps:
     - name: Print App Parameters
-      uses: JustSiHeshteger/pipeline-action/echo-app-parameters@c22e8e09b00e1f00f03255f5ada92ac45be31cf9
+      uses: ./.github/actions/echo-app-parameters
+
       with:
         java-version: ${{ inputs.java-version }}
         java-distributor: ${{ inputs.java-distributor }}
