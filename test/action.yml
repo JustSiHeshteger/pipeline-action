@@ -18,7 +18,7 @@ runs:
   using: composite
   steps:
     - name: Setup Gradle Environment
-      uses: JustSiHeshteger/pipeline-action/setup-gradle-env@v2.14.6
+      uses: JustSiHeshteger/pipeline-action/setup-gradle-env@v2.14.10
       with:
         java-version: ${{ inputs.java-version }}
         java-distributor: ${{ inputs.java-distributor }}
