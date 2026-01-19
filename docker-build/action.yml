@@ -42,17 +42,24 @@ runs:
         echo "Found JAR: $JAR_PATH"
         echo "JAR_PATH=$JAR_PATH" >> $GITHUB_ENV
 
+    - name: Copy JAR to Docker build context
+      shell: bash
+      run: |
+        cp "${{ env.JAR_PATH }}" app.jar
+        echo "JAR_FILE=app.jar" >> $GITHUB_ENV
+
+
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
 
     - name: Build Docker image
-      shell: bash
-      run: |
-        docker build \
-          --build-arg JAVA_VERSION=${{ inputs.java-version }} \
-          --build-arg JAVA_DISTRIBUTION=${{ inputs.java-distribution }} \
-          --build-arg JAR_FILE=$JAR_PATH \
-          -f ${{ inputs.dockerfile }} \
-          -t ${{ inputs.image-name }}:${{ inputs.image-tag }} \
-          ${{ inputs.working-directory }} \
-          .
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: Dockerfile
+        push: false
+        tags: ${{ inputs.image-name }}:${{ inputs.image-tag }}
+        build-args: |
+          JAR_FILE=${{ env.JAR_PATH }}
+          JAVA_VERSION=${{ inputs.java-version }}
+          JAVA_DISTRIBUTION=${{ inputs.java-distributor }}

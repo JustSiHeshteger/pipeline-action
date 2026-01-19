@@ -3,27 +3,22 @@ name: Setup Gradle Environment
 inputs:
   java-version:
     description: Java version
-    required: false
-    default: '21'
+    required: true
   java-distributor:
     description: Java distributor
-    required: false
-    default: 'temurin'
+    required: true
   working-directory:
     description: Directory of project on github
-    required: false
-    default: '.'
+    required: true
 
 runs:
   using: composite
   steps:
-    - name: Print App Parameters
-      uses: JustSiHeshteger/pipeline-action/echo-app-parameters@v2.14.6
-
-      with:
-        java-version: ${{ inputs.java-version }}
-        java-distributor: ${{ inputs.java-distributor }}
-        working-directory: ${{ inputs.working-directory }}
+    - name: Output java env
+      shell: bash
+      run: echo "Java version ${{ inputs.java-version }}; \
+        Java Distibutor ${{ inputs.java-distributor }}; \
+        Working directory ${{ inputs.working-directory }}"
 
     - name: Checkout repository
       uses: actions/checkout@v4
