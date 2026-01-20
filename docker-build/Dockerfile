@@ -1,7 +1,5 @@
-ARG JAVA_VERSION=21
-ARG JAVA_DISTRIBUTION=temurin
-
-FROM eclipse-${JAVA_DISTRIBUTION}:${JAVA_VERSION}-jre-alpine
+ARG BASE_IMAGE=eclipse-temurin:21-jre-alpine
+FROM ${BASE_IMAGE}
 
 WORKDIR /app
 

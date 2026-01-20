@@ -1,14 +1,6 @@
 name: Docker Build
 
 inputs:
-  java-version:
-    description: Java version
-    required: false
-    default: '21'
-  java-distributor:
-    description: Java distributor
-    required: false
-    default: temurin
   working-directory:
     description: Directory of project on github
     required: false
@@ -23,6 +15,10 @@ inputs:
   image-tag:
     description: Docker image tag
     required: true
+  base-image:
+    description: Docker Java Image
+    required: false
+    default: eclipse-temurin:21-jre-alpine
 
 runs:
   using: composite
@@ -72,5 +68,4 @@ runs:
         tags: ${{ inputs.image-name }}:${{ inputs.image-tag }}
         build-args: |
           JAR_FILE=${{ env.JAR_PATH }}
-          JAVA_VERSION=${{ inputs.java-version }}
-          JAVA_DISTRIBUTION=${{ inputs.java-distributor }}
+          BASE_IMAGE=${{ inputs.base-image }}
